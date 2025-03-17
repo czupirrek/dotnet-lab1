@@ -8,6 +8,9 @@ namespace dotnet_lab1_gui
         private int formsSeed;
         private int formsNumItems;
         private int formsCapacity;
+        private bool errorSeed = false;
+        private bool errorNumItems = false;
+        private bool errorCapacity = false;
 
         private Problem problem;
         private Result rv;
@@ -15,6 +18,7 @@ namespace dotnet_lab1_gui
         public Form1()
         {
             InitializeComponent();
+            this.Text = "problem plecakowy";
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -41,22 +45,23 @@ namespace dotnet_lab1_gui
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
-            try
+            if (int.TryParse(textBox1.Text, out int formsSeed))
             {
-                formsSeed = int.Parse(textBox1.Text);
                 if (formsSeed < 0)
                 {
-                    textBox1.BackColor = Color.Red;
+                    textBox1.BackColor = Color.Red; // ujemny seed -> error
+                    errorSeed = true;
+                }
+                else
+                {
+                    textBox1.BackColor = SystemColors.Window; // valid input
+                    errorSeed = false;
+                    this.formsSeed = formsSeed;
+
                 }
             }
-            catch (Exception)
-            {
-                textBox1.BackColor = Color.Orange;
-                throw;
-            }
-            
         }
+
 
         private void label5_Click(object sender, EventArgs e)
         {
@@ -65,46 +70,55 @@ namespace dotnet_lab1_gui
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (int.TryParse(textBox2.Text, out int formsCapacity))
             {
-                formsCapacity = int.Parse(textBox2.Text);
                 if (formsCapacity < 0)
                 {
-                    textBox2.BackColor = Color.Red;
+                    textBox2.BackColor = Color.Red; // ujemne capacity -> error
+                    errorCapacity = true;
+                }
+                else
+                {
+                    textBox2.BackColor = SystemColors.Window; // valid input
+                    errorCapacity = false;
+                    this.formsCapacity = formsCapacity;
+
                 }
             }
-            catch (Exception)
-            {
-                textBox2.BackColor = Color.Orange;
-                throw;
-            }
-            
-            
+
+
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (int.TryParse(textBox3.Text, out int formsNumItems))
             {
-                formsNumItems = int.Parse(textBox3.Text);
                 if (formsNumItems < 0)
                 {
-                    textBox3.BackColor = Color.Red;
+                    textBox3.BackColor = Color.Red; // ujemna wartosc -> error
+                    errorNumItems = true;
                 }
-            }
-            catch (Exception)
-            {
-                textBox3.BackColor = Color.Orange;
-                throw;
+                else
+                {
+                    textBox3.BackColor = SystemColors.Window; // valid input
+                    errorNumItems = false;
+                    this.formsNumItems = formsNumItems;
+
+                }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (errorSeed || errorNumItems || errorCapacity)
+            {
+                textBox5.Text = "invalid input";
+                return;
+            }
             problem = new Problem(formsSeed, formsNumItems);
             rv = problem.Solve(formsCapacity);
             textBox5.Text = "ids: " + rv.ToString() + "\r\nvalue sum: " + rv.getValueSum() + "\r\ncapacity used: " + rv.getCapacityUsed() ;
-
+            //textBox5.Text = formsCapacity.ToString() + formsNumItems.ToString() + formsSeed.ToString(); 
             textBox4.Text = problem.ParseToString();
 
 

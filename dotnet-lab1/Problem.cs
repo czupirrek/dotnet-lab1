@@ -37,7 +37,7 @@ namespace dotnet_lab1
             string rv = "";
             foreach (Item item in items)
             {
-                rv += "Id: " + item.Id + " Weight: " + item.Weight + " Value: " + item.Value + " Ratio: " + item.Ratio + "\r\n";
+                rv += "Id: " + item.Id + "\tWeight: " + item.Weight + "\tValue: " + item.Value + "\tRatio: " + Math.Round((decimal)item.Ratio, 2) + "\r\n";
             }
             return rv;
         }
