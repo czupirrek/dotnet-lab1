@@ -60,6 +60,12 @@ namespace dotnet_lab1_gui
 
                 }
             }
+            else
+            {
+                textBox1.BackColor = Color.Red; // blad parsowania
+                errorSeed = true;
+
+            }
         }
 
 
@@ -85,6 +91,11 @@ namespace dotnet_lab1_gui
 
                 }
             }
+            else
+            {
+                textBox2.BackColor = Color.Red; // blad parsowania
+                errorCapacity = true;
+            }
 
 
         }
@@ -105,6 +116,11 @@ namespace dotnet_lab1_gui
                     this.formsNumItems = formsNumItems;
 
                 }
+            }
+            else
+            {
+                textBox3.BackColor = Color.Red; // blad parsowania
+                errorNumItems = true;
             }
         }
 

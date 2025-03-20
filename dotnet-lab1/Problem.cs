@@ -20,7 +20,7 @@ namespace dotnet_lab1
             Random random = new Random(seed);
             for (int i = 0; i < numItems; i++)
             {
-                items.Add(new Item(i, random.Next(1, 10), random.Next(1, 10)));
+                items.Add(new Item(i, random.Next(1, 11), random.Next(1, 11)));
             }
         }
         public void Print()

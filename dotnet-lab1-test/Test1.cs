@@ -7,7 +7,7 @@ namespace dotnet_lab1_test
         [TestMethod]
         public void TestMethodCountElements() // test, czy generowana jest odpowiednia ilość przedmiotów
         {
-            List<int> sizes = new List<int>() { 10, 20, 30, 40, 50 };
+            List<int> sizes = new List<int>() {0, 10, 20, 30, 40, 50 };
 
             foreach (int n in sizes)
             {
